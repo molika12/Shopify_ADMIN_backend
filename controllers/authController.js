@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Tenant = require('../models/Tenant');
 
-// generate JWT helper (optional)
+
 const generateToken = (tenantId) => {
   return jwt.sign({ id: tenantId }, process.env.JWT_SECRET || 'secretkey', {
     expiresIn: '7d',
@@ -91,3 +91,4 @@ const loginTenant = async (req, res) => {
 };
 
 module.exports = { signupTenant, loginTenant };
+
