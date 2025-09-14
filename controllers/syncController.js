@@ -13,7 +13,7 @@ const fetchFromShopify = async (shopDomain, accessToken, endpoint) => {
   return res.data[endpoint.replace(".json","")] || [];
 };
 
-// Save/update customers
+
 const syncCustomers = async (req, res) => {
   try {
     const { shopDomain, accessToken, _id: tenantId } = req.tenant;
@@ -43,7 +43,7 @@ const syncCustomers = async (req, res) => {
   }
 };
 
-// Save/update orders
+
 const syncOrders = async (req, res) => {
   try {
     const { shopDomain, accessToken, _id: tenantId } = req.tenant;
@@ -73,7 +73,7 @@ const syncOrders = async (req, res) => {
   }
 };
 
-// Save/update products
+
 const syncProducts = async (req, res) => {
   try {
     const { shopDomain, accessToken, _id: tenantId } = req.tenant;
@@ -102,3 +102,4 @@ const syncProducts = async (req, res) => {
 };
 
 module.exports = { syncCustomers, syncOrders, syncProducts };
+
