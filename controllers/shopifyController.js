@@ -1,10 +1,10 @@
-// controllers/shopifyController.js
+
 const axios = require('axios');
-const User = require('../models/User'); // Your DB model where user tokens are stored
+const User = require('../models/User'); 
 
 exports.getCustomers = async (req, res) => {
   try {
-    const userId = req.user.id; // Assume middleware sets req.user
+    const userId = req.user.id;
     const user = await User.findById(userId);
 
     if (!user || !user.shopifyStore || !user.shopifyToken) {
@@ -36,3 +36,4 @@ exports.getCustomers = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
