@@ -10,10 +10,8 @@ exports.getCustomers = async (req, res) => {
     const tenant = await Tenant.findById(tenantId);
     if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
 
-    // Fetch customers from Shopify using tenant's shopDomain and shared token
     const customers = await fetchShopifyData(tenant.shopDomain, process.env.SHOPIFY_TOKEN, 'customers');
 
-    // Cache/update in MongoDB for tenant isolation
     for (const c of customers) {
       await Customer.updateOne(
         { id: c.id, tenantId },
@@ -28,3 +26,4 @@ exports.getCustomers = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
