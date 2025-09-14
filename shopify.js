@@ -1,13 +1,5 @@
 const fetch = require("node-fetch");
 
-/**
- * Fetch customers, orders, products from Shopify dynamically per tenant.
- * @param {string} shopDomain - Tenant's Shopify store domain
- * @param {string} accessToken - Tenant's Shopify access token (OAuth token)
- * @param {string} resource - Shopify resource to fetch ('customers', 'orders', 'products')
- * @returns {Promise<Array>} - Array of resource objects
- * @throws Will throw an error if fetch fails or Shopify returns non-OK status
- */
 async function fetchShopifyData(shopDomain, accessToken, resource) {
   if (!shopDomain || !accessToken || !resource) {
     throw new Error('Missing required parameters for Shopify fetch');
@@ -24,7 +16,6 @@ async function fetchShopifyData(shopDomain, accessToken, resource) {
   });
 
   if (!response.ok) {
-    // Attempt to extract Shopify error message if available
     let errorMessage = `Failed to fetch ${resource} from Shopify: ${response.status} ${response.statusText}`;
     try {
       const errorData = await response.json();
@@ -32,7 +23,6 @@ async function fetchShopifyData(shopDomain, accessToken, resource) {
         errorMessage += ` - ${JSON.stringify(errorData.errors)}`;
       }
     } catch (_) {
-      // Ignore JSON parse errors here
     }
     throw new Error(errorMessage);
   }
@@ -43,7 +33,8 @@ async function fetchShopifyData(shopDomain, accessToken, resource) {
     throw new Error(`Unexpected Shopify response format for resource: ${resource}`);
   }
 
-  return data[resource]; // e.g., customers, orders, products
+  return data[resource]; 
 }
 
 module.exports = { fetchShopifyData };
+
