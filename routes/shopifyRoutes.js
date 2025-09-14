@@ -4,7 +4,6 @@ const Tenant = require('../models/Tenant');
 
 const router = express.Router();
 
-// Tenant middleware
 const tenantMiddleware = async (req, res, next) => {
   const tenantId = req.headers['x-tenant-id'] || req.query.tenantId;
   if (!tenantId) return res.status(400).json({ error: 'Tenant ID missing' });
@@ -16,7 +15,6 @@ const tenantMiddleware = async (req, res, next) => {
   next();
 };
 
-// ---- Customers ----
 router.get("/customers", tenantMiddleware, async (req, res) => {
   try {
     const { shopDomain, accessToken } = req.tenant;
@@ -43,3 +41,4 @@ router.get("/customers", tenantMiddleware, async (req, res) => {
 });
 
 module.exports = router;
+
