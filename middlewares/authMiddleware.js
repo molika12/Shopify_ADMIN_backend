@@ -1,6 +1,5 @@
-// middleware/tenantMiddleware.js
 const jwt = require("jsonwebtoken");
-const Tenant = require("../models/Tenant"); // Use your Tenant model
+const Tenant = require("../models/Tenant"); 
 
 const tenantMiddleware = async (req, res, next) => {
   try {
@@ -12,16 +11,13 @@ const tenantMiddleware = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
 
-    // Verify JWT
     const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret");
 
-    // Fetch tenant from DB using decoded ID (optional, can trust JWT)
     const tenant = await Tenant.findById(decoded.id);
     if (!tenant) {
       return res.status(401).json({ message: "Tenant not found" });
     }
 
-    // Attach tenant info to request
     req.tenant = {
       id: tenant._id,
       name: tenant.name,
@@ -38,3 +34,4 @@ const tenantMiddleware = async (req, res, next) => {
 };
 
 module.exports = tenantMiddleware;
+
