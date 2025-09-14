@@ -2,10 +2,9 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-// Get customers for a tenant
 router.get('/', async (req, res) => {
   try {
-    const { shopDomain, accessToken } = req.query; // send from frontend
+    const { shopDomain, accessToken } = req.query; 
 
     if (!shopDomain || !accessToken) {
       return res.status(400).json({ message: 'ShopDomain and accessToken are required' });
@@ -28,3 +27,4 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
+
