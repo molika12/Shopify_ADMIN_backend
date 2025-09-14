@@ -4,12 +4,10 @@ const Tenant = require("../models/Tenant");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// ---- Signup ----
 router.post("/signup", async (req, res) => {
   try {
     const { name, email, password, shopDomain } = req.body;
 
-    // Check if email already exists
     const existing = await Tenant.findOne({ email });
     if (existing) return res.status(400).json({ message: "Email already exists" });
 
@@ -30,7 +28,6 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// ---- Login ----
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -48,3 +45,4 @@ router.post("/login", async (req, res) => {
 });
 
 module.exports = router;
+
