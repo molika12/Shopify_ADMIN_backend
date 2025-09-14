@@ -1,7 +1,5 @@
-// controllers/orderController.js
 const { getShopifyData } = require('../utils/shopify');
 
-// Get all orders from Shopify
 exports.getOrders = async (req, res) => {
   const tenantId = req.query.tenantId;
   if (!tenantId) return res.status(400).json({ error: 'Tenant ID required' });
@@ -34,3 +32,4 @@ exports.getOrders = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
