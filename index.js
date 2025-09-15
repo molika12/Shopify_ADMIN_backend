@@ -25,9 +25,9 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 30000, 
 })
-.then(() => console.log("✅ MongoDB Connected"))
+.then(() => console.log(" MongoDB Connected"))
 .catch(err => {
-  console.error("❌ MongoDB Error:", err);
+  console.error(" MongoDB Error:", err);
 });
 
 
@@ -122,4 +122,5 @@ app.get('/api/shopify/products', tenantMiddleware, async (req, res) => {
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
+
 
