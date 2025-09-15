@@ -15,7 +15,7 @@ async function syncShopifyDataForTenant(tenant) {
       'Content-Type': 'application/json',
     };
 
-    // Customers
+
     const custRes = await axios.get(
       `https://${tenant.shopDomain}/admin/api/2024-10/customers.json`,
       { headers }
@@ -65,4 +65,5 @@ async function syncShopifyDataForTenant(tenant) {
 }
 
 module.exports = { syncShopifyDataForTenant };
+
 
